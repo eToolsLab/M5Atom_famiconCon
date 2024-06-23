@@ -1,0 +1,75 @@
+/**
+ * M5 ATOM Lite bluetooth com
+ * Core2がマスター待ちの状態。
+*/
+#include <M5Atom.h>
+#include <BluetoothSerial.h>
+#include "myENV3.h"
+#include "myDS3231.h"
+
+BluetoothSerial SerialBT;
+uint16_t cnt;
+CRGB color;
+std::string str;
+
+void setup()
+{
+  //ATOM初期化 (Serial, I2C Wire0, RGBLED)
+  M5.begin(true,false,true);
+  //ENV3初期化
+  Wire.begin(26,32,400000U);
+  env3 = new ENV3(&Wire);
+  //DS3231初期化-------------------------------------------------------
+  Wire1.begin(25,21,400000U);
+  rtc.init(&Wire1, &Serial);
+  //bluetooth開始
+  SerialBT.begin("ATOM01");
+  //SerialBT.println("ATOM Lite bluetooth");
+  //Serial.println("ATOM Lite Start");
+}
+
+static String timestring;
+void loop()
+{
+  
+  if(cnt==33)
+  {
+    //RTC時間表示------------------------------------------------
+    DateTime now = rtc.now();
+    rtc.WriteDateTimeToString(&now);
+    timestring = rtc.dateString +"D"+ rtc.timeString +"T" +rtc.weekString+"X";
+    //Serial.print(timestring);
+  }
+
+
+  if(cnt==33)
+  {
+    cnt=0; 
+    if(color == CRGB::Green)
+    {
+      color = CRGB::Blue;
+    }else
+    {
+      color = CRGB::Green;
+    }
+    M5.dis.drawpix(0,color);
+    if(env3->sht30.get()==0)
+    {
+      env3->tmp = env3->sht30.cTemp;
+      env3->humi = env3->sht30.humidity;
+      env3->pressure = env3->qmp6988.calcPressure()/100;
+      //SerialBT.printf("%2.1fC %2.1f%% %4.0fpa\r\n",env3->tmp,env3->humi,env3->pressure);
+      SerialBT.printf("%S%2.1fC %2.1f%% %4.0fPa\r\n",
+                        timestring.c_str(),env3->tmp,env3->humi,env3->pressure);
+    }else
+    {
+      env3->tmp=0;
+      env3->humi=0;
+      SerialBT.printf("nonDdata\r\n");
+    }
+  }
+
+  cnt++;
+  delay(10);
+}
+
