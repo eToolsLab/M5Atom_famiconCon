@@ -23,6 +23,10 @@ void setup()
   M5.begin(true,false,true);
   delay(50);
   Serial.println("Start");
+  uint8_t bt_mac[6];
+  esp_read_mac(bt_mac, ESP_MAC_BT);
+  Serial.printf("%02X:%02X:%02X:%02X:%02X:%02X\n",
+                 bt_mac[0], bt_mac[1], bt_mac[2], bt_mac[3], bt_mac[4], bt_mac[5]);
   for(i=0; i<=1; i++)
   {
     M5.dis.drawpix(0, 0x000FFF000);
