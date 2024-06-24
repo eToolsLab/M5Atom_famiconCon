@@ -134,57 +134,57 @@ String famiconGetButtonName(uint16_t buttonValue)
             
             if((buttonValue&0x4000)==0x0)
             {
-                buttonName="Y ";
+                buttonName+="Y ";
             }
             
             if((buttonValue&0x2000)==0x0)
             {
-                buttonName="SELECT ";
+                buttonName+="SELECT ";
             }
             
             if((buttonValue&0x1000)==0x0)
             {
-                buttonName="START ";
+                buttonName+="START ";
             }
             
             if((buttonValue&0x0800)==0x0)
             {
-                buttonName="UP ";             
+                buttonName+="UP ";             
             }
                         
             if((buttonValue&0x0400)==0x0)
             {
-                buttonName="DOWN ";
+                buttonName+="DOWN ";
             }
             
             if((buttonValue&0x0200)==0x0)
             {
-                buttonName="LEFT ";
+                buttonName+="LEFT ";
             }
             
             if((buttonValue&0x0100)==0x0)
             {
-                buttonName="RIGHT ";
+                buttonName+="RIGHT ";
             }
             
             if((buttonValue&0x0080)==0x0)
             {
-                buttonName="A ";
+                buttonName+="A ";
             }
             
             if((buttonValue&0x0040)==0x0)
             {
-                buttonName="X ";
+                buttonName+="X ";
             }
             
             if((buttonValue&0x0020)==0x0)
             {
-                buttonName="L ";
+                buttonName+="L ";
             }
             
             if((buttonValue&0x0010)==0x0)
             {
-                buttonName="R ";
+                buttonName+="R ";
             }
             return buttonName;
         }

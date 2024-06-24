@@ -29,7 +29,7 @@ void setup()
                  bt_mac[0], bt_mac[1], bt_mac[2], bt_mac[3], bt_mac[4], bt_mac[5]);
   for(i=0; i<=1; i++)
   {
-    M5.dis.drawpix(0, 0x000FFF000);
+    M5.dis.drawpix(0, 0xFF0000);
     delay(500);
     M5.dis.drawpix(0, 0x000000);
     delay(500); 
@@ -53,7 +53,7 @@ void setup()
 /// @brief メインループ
 void loop() 
 {
-  M5.dis.drawpix(0, 0x000FFF000);
+  M5.dis.drawpix(0, 0xFF0000);
   delay(500);
   M5.dis.drawpix(0, 0x000000);
   delay(500); 

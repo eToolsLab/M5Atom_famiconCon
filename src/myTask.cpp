@@ -17,7 +17,8 @@ void my_task(void *arg)
     buttonState = famiconGetButtonState();
     if(buttonState!=0xFFF0)
     {
-        famiconPrintButtonState(buttonState);
+        //famiconPrintButtonState(buttonState);
+        SerialBT.printf("%04X\n",buttonState);
         buttonName = famiconGetButtonName(buttonState);
         //SSD1306 表示------------------------------------
         canvas.startWrite();//通信を開始する。（ペリフェラルを占有する）
