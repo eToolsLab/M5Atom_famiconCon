@@ -28,6 +28,8 @@ void my_task(void *arg)
         canvas.printf("%s\n",buttonName);
         canvas.pushSprite(0,0);
         canvas.endWrite();//通信を終了する。（ペリフェラルの占有を終了する)
+    }else{
+      SerialBT.printf("%04X\n",0xFFF0);
     }
     vTaskDelay(INTERVAL_TASK / portTICK_RATE_MS);
   }

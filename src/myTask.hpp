@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <M5ATOM.h>
 
-#define INTERVAL_TASK 30
+#define INTERVAL_TASK 100
 
 extern void setupTask(void);
 extern void my_task(void *arg);
